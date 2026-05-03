@@ -47,15 +47,24 @@ class MultimodalDataLoader:
             logger.warning(f"Diretório de imagens não encontrado: {self.images_dir}")
 
     def get_plant_list(self) -> List[str]:
-        """Retorna lista de plantas monitoradas."""
+        """Retorna lista de plantas monitoradas de TODOS os experimentos."""
         if not self.images_dir.exists():
             return []
 
-        # ✅ MODIFICADO 28 ABRIL: INCLUIR RASPBERRY também!
-        # Antes: excluía raspberry
-        # Agora: inclui AMBAS as plantas (sigrow + raspberry = 2.256 imagens!)
-        plant_dirs = [d.name for d in self.images_dir.glob("**/cva/*")
-                     if d.is_dir()]  # Sem exclusão, pega todas!
+        # ✅ MODIFICADO 3 MAIO: INCLUIR TODOS OS EXPERIMENTOS!
+        # Antes: carregava apenas de cva/ (2.256 imagens)
+        # Agora: carrega de cva/, monday-lettuce/, koala/, veggie-might/, reference/, digital-cucumbers/
+        # Total: 15.336 imagens!
+        plant_dirs = []
+
+        # Iterar sobre TODOS os diretórios de experimentos
+        for exp_dir in self.images_dir.iterdir():
+            if exp_dir.is_dir() and exp_dir.name not in ['.', '..']:
+                # Procurar por plantas (raspberry, sigrow) dentro de cada experimento
+                for plant_dir in exp_dir.iterdir():
+                    if plant_dir.is_dir() and plant_dir.name not in ['.', '..']:
+                        plant_dirs.append(f"{exp_dir.name}/{plant_dir.name}")
+
         return sorted(set(plant_dirs))
 
     def load_images_for_plant(self, plant_name: str,
@@ -64,14 +73,14 @@ class MultimodalDataLoader:
         Carrega todas as imagens de uma planta específica.
 
         Args:
-            plant_name: Nome da planta
+            plant_name: Nome da planta no formato "experiment/plant" (ex: "cva/raspberry", "monday-lettuce/sigrow")
             limit: Número máximo de imagens a carregar (None = todas)
 
         Returns:
             Dicionário {image_path: np_array}
         """
         images = {}
-        plant_img_dir = self.images_dir / f"cva/{plant_name}"
+        plant_img_dir = self.images_dir / plant_name
 
         if not plant_img_dir.exists():
             logger.error(f"Diretório da planta não encontrado: {plant_img_dir}")
@@ -80,7 +89,7 @@ class MultimodalDataLoader:
         png_files = sorted(plant_img_dir.rglob("*.png"))[:limit]
 
         logger.info(f"Carregando {len(png_files)} imagens de {plant_name}")
-        for img_path in tqdm(png_files, desc=f"Carregando imagens: {plant_name}"):
+        for img_path in tqdm(png_files, desc=f"Carregando imagens RGB", leave=False):
             try:
                 img = Image.open(img_path)
                 images[str(img_path)] = np.array(img)
