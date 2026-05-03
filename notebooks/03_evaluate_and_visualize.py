@@ -282,6 +282,120 @@ class ModelEvaluator:
             'f1': f1_score(y_true, y_pred),
         }
 
+    def plot_confusion_matrix(self, y_true, y_proba, threshold: float = 0.5):
+        """Visualiza matriz de confusão."""
+        y_proba_stress = y_proba[:, 1]
+        y_pred = (y_proba_stress >= threshold).astype(int)
+
+        cm = confusion_matrix(y_true, y_pred)
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                   xticklabels=['Normal', 'Stress'],
+                   yticklabels=['Normal', 'Stress'],
+                   cbar_kws={'label': 'Count'})
+        ax.set_xlabel('Predicted')
+        ax.set_ylabel('Actual')
+        ax.set_title(f'Confusion Matrix (threshold={threshold:.4f})')
+
+        plt.tight_layout()
+        plt.savefig(self.results_dir / '03_confusion_matrix.png', dpi=150, bbox_inches='tight')
+        logger.info(f"✓ Matriz de confusão salva em: results/03_confusion_matrix.png")
+        plt.close()
+
+        return cm
+
+    def plot_training_history(self):
+        """Carrega e visualiza histórico de treinamento."""
+        history_path = Path('/Users/helen.paixao/Desktop/tcc-mba-deteccao-anomalias/results/training_history.json')
+
+        if not history_path.exists():
+            logger.warning(f"⚠️  Arquivo de histórico não encontrado: {history_path}")
+            return
+
+        with open(history_path, 'r') as f:
+            history = json.load(f)
+
+        epochs = range(1, len(history.get('train_loss', [])) + 1)
+
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+
+        # Loss
+        if 'train_loss' in history and 'val_loss' in history:
+            ax = axes[0, 0]
+            ax.plot(epochs, history['train_loss'], 'b-', label='Train Loss', linewidth=2)
+            ax.plot(epochs, history['val_loss'], 'r-', label='Val Loss', linewidth=2)
+            ax.set_xlabel('Epoch')
+            ax.set_ylabel('Loss')
+            ax.set_title('Training & Validation Loss')
+            ax.legend()
+            ax.grid(True, alpha=0.3)
+
+        # Accuracy
+        if 'train_accuracy' in history and 'val_accuracy' in history:
+            ax = axes[0, 1]
+            ax.plot(epochs, history['train_accuracy'], 'b-', label='Train Accuracy', linewidth=2)
+            ax.plot(epochs, history['val_accuracy'], 'r-', label='Val Accuracy', linewidth=2)
+            ax.set_xlabel('Epoch')
+            ax.set_ylabel('Accuracy')
+            ax.set_title('Training & Validation Accuracy')
+            ax.legend()
+            ax.grid(True, alpha=0.3)
+
+        # F1-Score
+        if 'train_f1' in history and 'val_f1' in history:
+            ax = axes[1, 0]
+            ax.plot(epochs, history['train_f1'], 'b-', label='Train F1', linewidth=2)
+            ax.plot(epochs, history['val_f1'], 'r-', label='Val F1', linewidth=2)
+            ax.set_xlabel('Epoch')
+            ax.set_ylabel('F1-Score')
+            ax.set_title('Training & Validation F1-Score')
+            ax.legend()
+            ax.grid(True, alpha=0.3)
+
+        # AUC-ROC
+        if 'train_auc' in history and 'val_auc' in history:
+            ax = axes[1, 1]
+            ax.plot(epochs, history['train_auc'], 'b-', label='Train AUC', linewidth=2)
+            ax.plot(epochs, history['val_auc'], 'r-', label='Val AUC', linewidth=2)
+            ax.set_xlabel('Epoch')
+            ax.set_ylabel('AUC-ROC')
+            ax.set_title('Training & Validation AUC-ROC')
+            ax.legend()
+            ax.grid(True, alpha=0.3)
+
+        plt.tight_layout()
+        plt.savefig(self.results_dir / '03_training_history.png', dpi=150, bbox_inches='tight')
+        logger.info(f"✓ Histórico de treinamento salvo em: results/03_training_history.png")
+        plt.close()
+
+    def plot_class_distribution(self, y_true, title: str = "Class Distribution"):
+        """Visualiza distribuição de classes."""
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        unique, counts = np.unique(y_true, return_counts=True)
+        labels = ['Normal', 'Stress']
+        colors = ['green', 'red']
+
+        bars = ax.bar(labels, counts, color=colors, alpha=0.7, edgecolor='black', linewidth=2)
+        ax.set_ylabel('Count')
+        ax.set_title(title)
+        ax.grid(True, alpha=0.3, axis='y')
+
+        # Adicionar percentuais
+        total = sum(counts)
+        for bar, count in zip(bars, counts):
+            height = bar.get_height()
+            percentage = 100 * count / total
+            ax.text(bar.get_x() + bar.get_width()/2., height,
+                   f'{int(count)}\n({percentage:.1f}%)',
+                   ha='center', va='bottom', fontsize=12, fontweight='bold')
+
+        plt.tight_layout()
+        plt.savefig(self.results_dir / '03_class_distribution.png', dpi=150, bbox_inches='tight')
+        logger.info(f"✓ Distribuição de classes salva em: results/03_class_distribution.png")
+        plt.close()
+
 
 def main():
     print("\n" + "#"*80)
@@ -323,6 +437,9 @@ def main():
     # 6. Visualizar
     logger.info("\nGerando visualizações...")
     evaluator.plot_roc_curves(roc_results)
+    evaluator.plot_training_history()
+    evaluator.plot_class_distribution(y_true_test, "Test Set - Class Distribution")
+    evaluator.plot_confusion_matrix(y_true_test, y_proba_test, threshold=0.5)
 
     # 7. Avaliar em diferentes thresholds
     logger.info("\n" + "="*80)
