@@ -8,6 +8,7 @@ Interface interativa para:
 - Gerar alertas de estresse
 """
 
+import sys
 import streamlit as st
 import torch
 import numpy as np
@@ -84,15 +85,22 @@ def load_model():
             num_sensor_vars=4,
             num_classes=2,
             fusion_type='hybrid',
-            device=device
+            device=device,
+            visual_backbone='resnet18',
+            temporal_hidden_size=64,
         )
 
-        model_path = Path('models/best_model.pt')
+        model_path = Path('models/best_model_semi_supervised.pt')
+        if not model_path.exists():
+            model_path = Path('models/best_model.pt')
         if model_path.exists():
             checkpoint = torch.load(model_path, map_location=device, weights_only=False)
-            visual_model.load_state_dict(checkpoint['visual_model_state'])
-            temporal_model.load_state_dict(checkpoint['temporal_model_state'])
-            fusion_model.load_state_dict(checkpoint['fusion_model_state'])
+            v_key = 'visual_model_state' if 'visual_model_state' in checkpoint else 'visual_model'
+            t_key = 'temporal_model_state' if 'temporal_model_state' in checkpoint else 'temporal_model'
+            f_key = 'fusion_model_state' if 'fusion_model_state' in checkpoint else 'fusion_model'
+            visual_model.load_state_dict(checkpoint[v_key])
+            temporal_model.load_state_dict(checkpoint[t_key])
+            fusion_model.load_state_dict(checkpoint[f_key])
 
             visual_model.eval()
             temporal_model.eval()
@@ -133,6 +141,110 @@ def load_roc_recommendations():
             return None
     except:
         return None
+
+
+# ============================================================================
+# FUNÇÃO: Predição Real com Modelo Treinado
+# ============================================================================
+def predict_real(visual_model, temporal_model, fusion_model, device,
+                 image: Image.Image, temp: float, humid: float,
+                 co2: float, par: float) -> dict:
+    """
+    Realiza predição real usando o modelo treinado.
+
+    Args:
+        visual_model: Modelo CNN treinado
+        temporal_model: Modelo LSTM treinado
+        fusion_model: Modelo de fusão treinado
+        device: Device (cpu/cuda)
+        image: Imagem PIL
+        temp, humid, co2, par: Valores dos sensores
+
+    Returns:
+        dict com predição, confiança e nível de alerta
+    """
+    try:
+        # 1. Processar imagem
+        img_array = np.array(image)
+
+        # Se já está RGB, ótimo. Se não, converter
+        if len(img_array.shape) == 2:  # Grayscale
+            img_array = np.stack([img_array] * 3, axis=2)
+
+        # Resize para 224x224
+        from PIL import Image as PILImage
+        img_pil = PILImage.fromarray(img_array)
+        img_pil = img_pil.resize((224, 224))
+        img_array = np.array(img_pil, dtype=np.float32) / 255.0  # Normalizar [0,1]
+
+        # Converter para tensor (C, H, W)
+        if img_array.shape[2] == 4:  # RGBA
+            img_array = img_array[:, :, :3]  # Remover alpha
+
+        img_tensor = torch.from_numpy(img_array).permute(2, 0, 1).unsqueeze(0).to(device)
+
+        # 2. Criar tensor de sensores (24 timesteps, 4 variáveis)
+        # Simular série temporal: variações pequenas ao redor dos valores atuais
+        n_steps = 24
+        sensor_data = np.zeros((n_steps, 4), dtype=np.float32)
+
+        # Valores base
+        sensor_data[:, 0] = temp + np.random.randn(n_steps) * 0.5  # Temperatura
+        sensor_data[:, 1] = humid + np.random.randn(n_steps) * 1.0  # Umidade
+        sensor_data[:, 2] = co2 + np.random.randn(n_steps) * 10.0   # CO2
+        sensor_data[:, 3] = par + np.random.randn(n_steps) * 20.0   # PAR
+
+        # Normalizar sensores (StandardScaler simples)
+        sensor_data_norm = (sensor_data - sensor_data.mean(axis=0)) / (sensor_data.std(axis=0) + 1e-8)
+        sensor_tensor = torch.from_numpy(sensor_data_norm).unsqueeze(0).to(device)  # (1, 24, 4)
+
+        # 3. Forward pass
+        with torch.no_grad():
+            visual_features = visual_model(img_tensor)  # (1, 256)
+            temporal_features = temporal_model(sensor_tensor)  # (1, 128)
+            logits = fusion_model(visual_features, temporal_features)  # (1, 2)
+            probabilities = torch.softmax(logits, dim=1)  # (1, 2)
+
+        # 4. Extrair predição
+        normal_prob = probabilities[0, 0].item()  # Classe 0: Normal
+        stress_prob = probabilities[0, 1].item()   # Classe 1: Stress
+        pred_confidence = stress_prob
+        is_stress = stress_prob > 0.5
+
+        # 5. Determinar nível de alerta baseado em confiança
+        if pred_confidence < 0.60:
+            alert_level = "🟢 NORMAL"
+            alert_color = "#2ecc71"
+        elif pred_confidence < 0.75:
+            alert_level = "🟡 LEVE"
+            alert_color = "#f39c12"
+        elif pred_confidence < 0.90:
+            alert_level = "🟠 MODERADO"
+            alert_color = "#e67e22"
+        else:
+            alert_level = "🔴 SEVERO"
+            alert_color = "#e74c3c"
+
+        return {
+            'stress_probability': stress_prob,
+            'normal_probability': normal_prob,
+            'confidence': pred_confidence,
+            'is_stress': is_stress,
+            'alert_level': alert_level,
+            'alert_color': alert_color,
+            'error': None
+        }
+
+    except Exception as e:
+        return {
+            'error': f"Erro na predição: {str(e)}",
+            'stress_probability': 0.5,
+            'normal_probability': 0.5,
+            'confidence': 0.5,
+            'is_stress': False,
+            'alert_level': '❌ ERRO',
+            'alert_color': '#95a5a6'
+        }
 
 
 # ============================================================================
@@ -436,11 +548,31 @@ elif page == "🔮 Predições":
 
     if st.button("🔮 Gerar Predição", use_container_width=True):
         if uploaded_image:
-            st.success("✅ Predição processada!")
+            # Carregar modelos se não estiverem carregados
+            visual_model, temporal_model, fusion_model, device, models_loaded = load_model()
 
-            # Simular predição
-            pred_confidence = np.random.uniform(0.6, 0.95)
-            is_stress = pred_confidence > 0.7
+            if not models_loaded:
+                st.warning("⚠️ Modelo não encontrado em models/best_model.pt. Usando simulação para demonstração.")
+                # Fallback para simulação
+                pred_confidence = np.random.uniform(0.6, 0.95)
+                is_stress = pred_confidence > 0.7
+                alert_level = "Simulado"
+            else:
+                st.success("✅ Predição processada com modelo treinado!")
+
+                # Predição REAL com modelo treinado
+                result = predict_real(visual_model, temporal_model, fusion_model, device,
+                                    uploaded_image, temp, humid, co2, par)
+
+                if result['error']:
+                    st.error(f"Erro na predição: {result['error']}")
+                    pred_confidence = result['confidence']
+                    is_stress = result['is_stress']
+                    alert_level = result['alert_level']
+                else:
+                    pred_confidence = result['confidence']
+                    is_stress = result['is_stress']
+                    alert_level = result['alert_level']
 
             col1, col2 = st.columns(2)
 

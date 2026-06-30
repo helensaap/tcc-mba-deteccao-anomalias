@@ -11,8 +11,40 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.rnn import pad_sequence
+from torchvision.models import resnet18
 import numpy as np
 from typing import Tuple, Optional
+
+
+class ResNet18(nn.Module):
+    """ResNet18 com fine-tuning — arquitetura usada nos checkpoints da Fase 6/7.
+
+    Compatível com `models/best_model_semi_supervised.pt`,
+    `models/best_model_advanced_real_data.pt` e `models/best_model.pt`.
+    """
+
+    def __init__(self, num_features: int = 256):
+        super().__init__()
+        resnet = resnet18(pretrained=False)
+        self.features = nn.Sequential(*list(resnet.children())[:-1])
+        self.fc = nn.Sequential(
+            nn.Linear(512, 512),
+            nn.BatchNorm1d(512),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.4),
+            nn.Linear(512, 256),
+            nn.BatchNorm1d(256),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.3),
+            nn.Linear(256, num_features),
+            nn.BatchNorm1d(num_features),
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.features(x)
+        x = x.view(x.size(0), -1)
+        x = self.fc(x)
+        return x
 
 
 class PhenotypicFeatureExtractor(nn.Module):
@@ -278,16 +310,26 @@ def create_multimodal_model(visual_feature_size: int = 256,
                            num_sensor_vars: int = 4,
                            num_classes: int = 2,
                            fusion_type: str = 'hybrid',
-                           device: str = 'cpu') -> Tuple[nn.Module, nn.Module, nn.Module]:
+                           device: str = 'cpu',
+                           visual_backbone: str = 'resnet18',
+                           temporal_hidden_size: int = 64) -> Tuple[nn.Module, nn.Module, nn.Module]:
     """
     Factory function para criar o sistema completo multimodal.
+
+    Args:
+        visual_backbone: 'resnet18' (default — compatível com checkpoints Fase 6/7)
+                         ou 'phenotypic' (CNN custom — checkpoints antigos/experimentais).
 
     Returns:
         Tupla (visual_extractor, temporal_analyzer, fusion_model)
     """
-    visual_model = PhenotypicFeatureExtractor(input_channels=3,
-                                            num_features=visual_feature_size).to(device)
+    if visual_backbone == 'resnet18':
+        visual_model = ResNet18(num_features=visual_feature_size).to(device)
+    else:
+        visual_model = PhenotypicFeatureExtractor(input_channels=3,
+                                                num_features=visual_feature_size).to(device)
     temporal_model = TemporalSensorAnalyzer(input_size=num_sensor_vars,
+                                          hidden_size=temporal_hidden_size,
                                           output_size=temporal_feature_size).to(device)
     fusion_model = MultimodalFusionModel(visual_feature_size=visual_feature_size,
                                         temporal_feature_size=temporal_feature_size,

@@ -2,6 +2,7 @@
 venv/
 env/
 ENV/
+.venv/
 
 # Python
 __pycache__/
@@ -24,6 +25,9 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -43,18 +47,31 @@ data/processed/
 *.csv
 *.xlsx
 *.json
+!skills-lock.json
+!results/*.json
 
-# Modelos
+# Modelos (distribuir via GitHub Releases / Hugging Face)
+models/*.pt
 models/*.pkl
 models/*.h5
 models/*.joblib
+models/checkpoint_*
+models/archive/
 
-# Resultados
+# Resultados (gerados localmente)
 results/
 *.png
 *.jpg
 *.pdf
+!Metodologia*.pdf
 
 # Ambiente
 .env
 .env.local
+.envrc
+
+# Tooling interno (não-público)
+.agents/
+
+# OS
+Thumbs.db
