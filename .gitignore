@@ -70,8 +70,9 @@ results/
 .env.local
 .envrc
 
-# Tooling interno (não-público)
+# Tooling interno de IA (não-público)
 .agents/
+skills-lock.json
 
 # OS
 Thumbs.db
