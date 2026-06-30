@@ -74,5 +74,8 @@ results/
 .agents/
 skills-lock.json
 
+# Guias internos (não publicar)
+RELEASE_PLAN.md
+
 # OS
 Thumbs.db

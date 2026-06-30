@@ -69,7 +69,7 @@ class AlertThresholds:
     - Youden, WJ (1950): "Index for rating diagnostic tests"
     - Van Rijsbergen, CJ (1979): "Information Retrieval"
     - Notebook: 03_evaluate_and_visualize.py
-    - Documento: SCIENTIFIC_JUSTIFICATION.md (seção 6)
+    - Documento: docs/SCIENTIFIC_JUSTIFICATION.md (seção 6)
     """
 
     def __init__(self):

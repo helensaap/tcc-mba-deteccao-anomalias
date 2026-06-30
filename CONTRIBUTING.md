@@ -20,7 +20,7 @@ ou Hugging Face Hub conforme [models/MODELS_MANIFEST.md](models/MODELS_MANIFEST.
 ## Obter os dados
 
 O dataset "1st Experiment" não é redistribuído. Veja
-[POLITICA_DADOS.md](POLITICA_DADOS.md) para origem e termos.
+[docs/POLITICA_DADOS.md](docs/POLITICA_DADOS.md) para origem e termos.
 
 ## Rodar os testes
 

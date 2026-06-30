@@ -103,7 +103,7 @@ Pequeno detalhe técnico: o desvio padrão é exatamente 0.0 porque o test set �
 - **Domínio restrito** — leafy greens, não Cannabis.
 - **107 labels** de 15.336 imagens (0.7% supervisão).
 
-Limitações documentadas explicitamente em [MODEL_CARD.md](MODEL_CARD.md) seção 8.
+Limitações documentadas explicitamente em [MODEL_CARD.md](../MODEL_CARD.md) seção 8.
 
 ---
 
@@ -131,7 +131,7 @@ Tentamos melhorar a Fase 7 reduzindo threshold de pseudo-label (0.85 → 0.70) e
 | 2 | Test set isolado, sem leakage | ✅ | `09_auditoria_legitimidade.json` |
 | 3 | Melhoria estatisticamente real (F1: 0 → 0.4) | ✅ | `08_evaluation_comparison.json` |
 | 4 | Reprodutível (σ=0.0) | ✅ | `10_reproducibility_test.json` |
-| 5 | Limitações reconhecidas explicitamente | ✅ | [MODEL_CARD.md](MODEL_CARD.md) §8, [RESULTS.md](RESULTS.md) §"Honestidade" |
+| 5 | Limitações reconhecidas explicitamente | ✅ | [MODEL_CARD.md](../MODEL_CARD.md) §8, [RESULTS.md](RESULTS.md) §"Honestidade" |
 
 ---
 

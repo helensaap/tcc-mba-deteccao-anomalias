@@ -31,7 +31,7 @@ Linha do tempo única e auditável do projeto. Substitui: `PROGRESS_SUMMARY.md`,
 - Análise ROC com 29 amostras → thresholds validados (`results/03_roc_recommendations.json`)
 - Youden's Index = 0.4482 substituiu thresholds inventados (0.60/0.75/0.90)
 
-**Saída:** [SCIENTIFIC_JUSTIFICATION.md](SCIENTIFIC_JUSTIFICATION.md) seção 6 documentando origem de cada threshold.
+**Saída:** [SCIENTIFIC_JUSTIFICATION.md](docs/SCIENTIFIC_JUSTIFICATION.md) seção 6 documentando origem de cada threshold.
 
 ---
 
@@ -39,7 +39,7 @@ Linha do tempo única e auditável do projeto. Substitui: `PROGRESS_SUMMARY.md`,
 
 - [src/real_data_loader.py](src/real_data_loader.py): parser de `GreenhouseCrop.xlsx` (labels) e `GreenhouseClimate.xlsx` (13.825 sensores)
 - Notebook [02b_train_with_real_data.py](notebooks/02b_train_with_real_data.py)
-- **Decisão crítica:** descontinuar notebooks com `np.random.randn()` — formalizado em [POLITICA_DADOS.md](POLITICA_DADOS.md)
+- **Decisão crítica:** descontinuar notebooks com `np.random.randn()` — formalizado em [POLITICA_DADOS.md](docs/POLITICA_DADOS.md)
 - Arquivos movidos para `.deprecated`:
   - `notebooks/04_retrain_improved.py.deprecated`
   - `notebooks/04_retrain_transfer_learning.py.deprecated`
@@ -107,14 +107,14 @@ Realizada após questionamento de honestidade científica.
 | Completude do dataset | [11_verify_all_images_loaded.py](notebooks/11_verify_all_images_loaded.py) | ✅ 15.336 imagens carregadas |
 | Reavaliação Fase 7 original | [12_evaluate_original_phase7.py](notebooks/12_evaluate_original_phase7.py) | ✅ 64.71% reproduzido |
 
-Detalhes em [AUDITORIA_CIENTIFICA.md](AUDITORIA_CIENTIFICA.md).
+Detalhes em [AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md).
 
 ---
 
 ## Fase Documentação — Consolidação (29-Jun-2026)
 
 - 28 arquivos `.md/.txt` na raiz → 9 arquivos enxutos
-- Métricas unificadas em [RESULTS.md](RESULTS.md) (fonte única de verdade)
+- Métricas unificadas em [RESULTS.md](docs/RESULTS.md) (fonte única de verdade)
 - Card de modelo formal em [MODEL_CARD.md](MODEL_CARD.md)
 - Scripts soltos movidos para `scripts/`
 - Notebooks `.deprecated` movidos para `notebooks/_archive/`
@@ -130,13 +130,13 @@ Detalhes em [AUDITORIA_CIENTIFICA.md](AUDITORIA_CIENTIFICA.md).
 | Frontend Streamlit | ✅ Funcional ([app.py](app.py)) |
 | Documentação | ✅ Consolidada — 9 arquivos enxutos |
 | Reprodutibilidade | ✅ σ=0.0 verificada |
-| Defesa acadêmica | ✅ Material pronto em [METODOLOGIA.md](METODOLOGIA.md) |
+| Defesa acadêmica | ✅ Material pronto em [METODOLOGIA.md](docs/METODOLOGIA.md) |
 
 ---
 
 ## Próximas Fases Possíveis (Backlog)
 
-Não obrigatório para defesa; veja [ANALISE_PROFUNDA.md](ANALISE_PROFUNDA.md):
+Não obrigatório para defesa; veja [ANALISE_PROFUNDA.md](docs/ANALISE_PROFUNDA.md):
 
 - Coleta de mais labels reais (de 107 → 500+)
 - Validação em estufa operacional (Cannabis medicinal, fitoterápicos)

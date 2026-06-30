@@ -20,7 +20,7 @@ Este é o **único documento autorizado** a reportar métricas do projeto. Qualq
 | **Reprodutibilidade** | 100% (σ=0.0 em 5 runs) | `results/10_reproducibility_test.json` |
 
 **Modelo oficial:** [models/best_model_semi_supervised.pt](models/best_model_semi_supervised.pt) (Fase 7, semi-supervised learning).
-Detalhes do checkpoint em [MODEL_CARD.md](MODEL_CARD.md).
+Detalhes do checkpoint em [MODEL_CARD.md](../MODEL_CARD.md).
 
 ---
 
@@ -122,7 +122,7 @@ Estas métricas aparecem em documentos antigos e **estão erradas ou são engano
 | 100% accuracy (epoch 6) | logs de notebooks `.deprecated` | Dados sintéticos (np.random) — descontinuados |
 | ~50% accuracy | README antigo | Vago; o número exato é 52.94% (Fase 6 degenerada) |
 
-Veja [CHANGELOG_FASES.md](CHANGELOG_FASES.md) para a cronologia completa.
+Veja [CHANGELOG_FASES.md](../CHANGELOG.md) para a cronologia completa.
 
 ---
 

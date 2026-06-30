@@ -87,7 +87,7 @@ Imagem RGB (224×224)          Sensores (24 × 4)
         Sistema de Alertas (4 níveis)
 ```
 
-Detalhes em [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+Detalhes em [docs/ARCHITECTURE.md](ARCHITECTURE.md).
 
 ### 5.3 Estratégia de Treinamento
 
@@ -96,7 +96,7 @@ Detalhes em [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 - Pseudo-label threshold: 0.85
 - Loss: `L_supervised + λ · L_unlabeled`, λ=1.0
 
-Decisão metodológica fundamentada em [CHANGELOG_FASES.md](CHANGELOG_FASES.md) Fases 4–7.
+Decisão metodológica fundamentada em [CHANGELOG_FASES.md](../CHANGELOG.md) Fases 4–7.
 
 ### 5.4 Validação
 
@@ -176,12 +176,12 @@ Lista completa em [ANALISE_PROFUNDA.md](ANALISE_PROFUNDA.md) §8. Núcleo:
 | [README.md](README.md) | Entrypoint — visão geral + quick start |
 | [METODOLOGIA.md](METODOLOGIA.md) | **Este documento** — defesa acadêmica |
 | [RESULTS.md](RESULTS.md) | Fonte única de métricas |
-| [MODEL_CARD.md](MODEL_CARD.md) | Card formal do modelo |
+| [MODEL_CARD.md](../MODEL_CARD.md) | Card formal do modelo |
 | [AUDITORIA_CIENTIFICA.md](AUDITORIA_CIENTIFICA.md) | Honestidade científica |
 | [ANALISE_PROFUNDA.md](ANALISE_PROFUNDA.md) | Diagnóstico técnico + roadmap |
-| [CHANGELOG_FASES.md](CHANGELOG_FASES.md) | Cronologia |
+| [CHANGELOG_FASES.md](../CHANGELOG.md) | Cronologia |
 | [POLITICA_DADOS.md](POLITICA_DADOS.md) | Decisão de não usar dados sintéticos |
 | [SCIENTIFIC_JUSTIFICATION.md](SCIENTIFIC_JUSTIFICATION.md) | Origem científica dos parâmetros |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Arquitetura técnica |
-| [docs/FRONTEND.md](docs/FRONTEND.md) | Guia do Streamlit |
+| [docs/ARCHITECTURE.md](ARCHITECTURE.md) | Arquitetura técnica |
+| [docs/FRONTEND.md](FRONTEND.md) | Guia do Streamlit |
 | [models/MODELS_MANIFEST.md](models/MODELS_MANIFEST.md) | Catálogo de `.pt` |

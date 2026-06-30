@@ -45,10 +45,10 @@ python notebooks/08_evaluate_semi_supervised.py
 | **Reprodutibilidade** | σ=0.0 em 5 runs |
 
 **Modelo oficial:** `models/best_model_semi_supervised.pt` (Fase 7).
-Fonte única e detalhada em **[RESULTS.md](RESULTS.md)**. Card formal em **[MODEL_CARD.md](MODEL_CARD.md)**.
+Fonte única e detalhada em **[docs/RESULTS.md](docs/RESULTS.md)**. Card formal em **[MODEL_CARD.md](MODEL_CARD.md)**.
 
 > Test set tem n=17. Cada amostra vale ~5.9 pp. Resultado é prova de conceito acadêmica, **não produção**.
-> Limitações documentadas honestamente em [AUDITORIA_CIENTIFICA.md](AUDITORIA_CIENTIFICA.md).
+> Limitações documentadas honestamente em [docs/AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md).
 
 ---
 
@@ -100,14 +100,14 @@ Detalhes em [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 | Documento | Quando ler |
 |---|---|
-| **[METODOLOGIA.md](METODOLOGIA.md)** | Apresentar o trabalho (banca, slides) |
-| **[RESULTS.md](RESULTS.md)** | Citar métricas — fonte única de verdade |
+| **[docs/METODOLOGIA.md](docs/METODOLOGIA.md)** | Apresentar o trabalho (banca, slides) |
+| **[docs/RESULTS.md](docs/RESULTS.md)** | Citar métricas — fonte única de verdade |
 | **[MODEL_CARD.md](MODEL_CARD.md)** | Detalhes do modelo oficial |
-| **[ANALISE_PROFUNDA.md](ANALISE_PROFUNDA.md)** | Diagnóstico técnico + roadmap futuro |
-| **[AUDITORIA_CIENTIFICA.md](AUDITORIA_CIENTIFICA.md)** | Verificações de honestidade científica |
-| **[CHANGELOG_FASES.md](CHANGELOG_FASES.md)** | Cronologia das 7 fases |
-| **[POLITICA_DADOS.md](POLITICA_DADOS.md)** | Decisão de não usar dados sintéticos |
-| **[SCIENTIFIC_JUSTIFICATION.md](SCIENTIFIC_JUSTIFICATION.md)** | Origem científica dos parâmetros |
+| **[docs/ANALISE_PROFUNDA.md](docs/ANALISE_PROFUNDA.md)** | Diagnóstico técnico + roadmap futuro |
+| **[docs/AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md)** | Verificações de honestidade científica |
+| **[CHANGELOG.md](CHANGELOG.md)** | Cronologia das 7 fases |
+| **[docs/POLITICA_DADOS.md](docs/POLITICA_DADOS.md)** | Decisão de não usar dados sintéticos |
+| **[docs/SCIENTIFIC_JUSTIFICATION.md](docs/SCIENTIFIC_JUSTIFICATION.md)** | Origem científica dos parâmetros |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Arquitetura detalhada |
 | [docs/FRONTEND.md](docs/FRONTEND.md) | Guia do Streamlit |
 | [models/MODELS_MANIFEST.md](models/MODELS_MANIFEST.md) | Catálogo de `.pt` |
@@ -124,7 +124,7 @@ Detalhes em [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | Ground truth | 239 imagens labeled (A/B=Normal, C=Stress) |
 | Split | 74 train · 16 val · 17 test (seed=42) |
 
-Política em [POLITICA_DADOS.md](POLITICA_DADOS.md). **Apenas dados reais — sem componentes sintéticos.**
+Política em [docs/POLITICA_DADOS.md](docs/POLITICA_DADOS.md). **Apenas dados reais — sem componentes sintéticos.**
 
 ---
 
@@ -147,7 +147,7 @@ Política em [POLITICA_DADOS.md](POLITICA_DADOS.md). **Apenas dados reais — se
 - Domínio restrito (leafy greens, não Cannabis)
 - 107 labels / 15.336 imagens (0.7% supervisão)
 
-Veja [MODEL_CARD.md §8](MODEL_CARD.md) e roadmap em [ANALISE_PROFUNDA.md §5](ANALISE_PROFUNDA.md).
+Veja [MODEL_CARD.md §8](MODEL_CARD.md) e roadmap em [docs/ANALISE_PROFUNDA.md §5](docs/ANALISE_PROFUNDA.md).
 
 ---
 
@@ -160,4 +160,4 @@ Projeto acadêmico — fins de pesquisa e ensino.
 
 ## 📖 Referências Núcleo
 
-He et al. (2015) · Vaswani et al. (2017) · Baltrušaitis et al. (2018) · Taiz & Zeiger (2015) · Youden (1950) · Lee (2013). Lista completa em [METODOLOGIA.md](METODOLOGIA.md).
+He et al. (2015) · Vaswani et al. (2017) · Baltrušaitis et al. (2018) · Taiz & Zeiger (2015) · Youden (1950) · Lee (2013). Lista completa em [docs/METODOLOGIA.md](docs/METODOLOGIA.md).

@@ -57,7 +57,7 @@ Detalhes em [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) e [src/models.py](src/m
 | Classes | A/B → Normal (0); C → Stress (1) |
 | Splits | 74 train · 16 val · 17 test |
 
-Política de dados em [POLITICA_DADOS.md](POLITICA_DADOS.md).
+Política de dados em [POLITICA_DADOS.md](docs/POLITICA_DADOS.md).
 
 ---
 
@@ -72,7 +72,7 @@ Política de dados em [POLITICA_DADOS.md](POLITICA_DADOS.md).
 | AUC-ROC | 0.729 |
 | Loss | 0.601 |
 
-Fonte: `results/08_evaluation_comparison.json`. Análise completa em [RESULTS.md](RESULTS.md).
+Fonte: `results/08_evaluation_comparison.json`. Análise completa em [RESULTS.md](docs/RESULTS.md).
 
 ---
 
@@ -111,13 +111,13 @@ Níveis de severidade do alerta (`src/alert_system.py`):
 4. **Dataset desbalanceado labelado:** 107 labels para 15.336 imagens (0.7% supervisão).
 5. **Validação ex situ:** sem teste em estufa operacional ainda.
 
-Roadmap de mitigação em [ANALISE_PROFUNDA.md](ANALISE_PROFUNDA.md).
+Roadmap de mitigação em [ANALISE_PROFUNDA.md](docs/ANALISE_PROFUNDA.md).
 
 ---
 
 ## 9. Considerações Éticas e Científicas
 
-- **Honestidade:** este card declara o desempenho real do modelo, sem maquiar números. Veja [AUDITORIA_CIENTIFICA.md](AUDITORIA_CIENTIFICA.md).
+- **Honestidade:** este card declara o desempenho real do modelo, sem maquiar números. Veja [AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md).
 - **Sem dados sintéticos:** modelo treinado 100% com dados reais. Notebooks que usavam `np.random` foram descontinuados (`.deprecated`).
 - **Reprodutível:** σ=0.0 entre 5 runs (`results/10_reproducibility_test.json`).
 
