@@ -45,7 +45,7 @@ python notebooks/08_evaluate_semi_supervised.py
 | **Reprodutibilidade** | σ=0.0 em 5 runs |
 
 **Modelo oficial:** `models/best_model_semi_supervised.pt` (Fase 7).
-Fonte única e detalhada em **[docs/RESULTS.md](docs/RESULTS.md)**. Card formal em **[MODEL_CARD.md](MODEL_CARD.md)**.
+Detalhamento completo em **[docs/RESULTS.md](docs/RESULTS.md)**. Card formal em **[MODEL_CARD.md](MODEL_CARD.md)**.
 
 > Test set tem n=17. Cada amostra vale ~5.9 pp. Resultado é prova de conceito acadêmica, **não produção**.
 > Limitações documentadas honestamente em [docs/AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md).
@@ -136,7 +136,7 @@ Política em [docs/POLITICA_DADOS.md](docs/POLITICA_DADOS.md). **Apenas dados re
 - [x] Threshold de alerta validado por ROC curve (Youden=0.4482)
 - [x] Frontend Streamlit funcional
 - [x] Auditoria de honestidade científica completa
-- [x] Documentação consolidada (28 arquivos → 9 enxutos)
+- [x] Documentação consolidada (28 arquivos → 9 documentos)
 
 ---
 

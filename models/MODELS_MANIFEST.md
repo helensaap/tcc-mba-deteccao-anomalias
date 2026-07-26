@@ -63,7 +63,7 @@ fusion.eval()
 
 ---
 
-## Total em disco (após reorganização)
+## Total em disco
 
 ~225 MB nos 5 modelos públicos. Distribuir apenas
 `best_model_semi_supervised.pt` (46 MB) cobre 100% do que [RESULTS.md](../docs/RESULTS.md)

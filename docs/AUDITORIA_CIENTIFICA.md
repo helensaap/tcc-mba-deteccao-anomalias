@@ -1,7 +1,5 @@
 # 🔍 Auditoria Científica — Honestidade e Legitimidade
 
-Consolida: `ANALISE_HONESTIDADE_CIENTIFICA.md`, `AUDITORIA_MELHORIA_ACURACIA.md`, `RESPOSTA_VERIFICACAO_FINAL.md`, `PROVA_FUNCIONAMENTO_REAL.txt`, `ANALISE_TECNICA_17_05_2026.md`, `ANALISE_FASE7_MELHORADO_RESULTADOS.md`.
-
 **Data da auditoria:** 17-Mai-2026
 **Auditora:** Helen Paixão (auto-auditoria pré-defesa)
 

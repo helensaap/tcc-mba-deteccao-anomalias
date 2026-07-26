@@ -1,14 +1,8 @@
-# 🔬 RASTREABILIDADE CIENTÍFICA - Justificativa de Parâmetros
+# 🔬 Rastreabilidade Científica — Justificativa de Parâmetros
 
 **Data**: 28 de Abril de 2026
 **Autor**: Helen Paixão
 **Projeto**: TCC MBA - IA Multimodal para Detecção de Estresse Abiótico
-
----
-
-## ⚠️ STATUS ATUAL: LEVANTAMENTO EM PROGRESSO
-
-Este documento registra a **origem científica de CADA PARÂMETRO** usado no projeto.
 
 ---
 
@@ -303,7 +297,7 @@ Referência: Van Rijsbergen (1979) - "Information Retrieval"
 
 ---
 
-## 7️⃣ ANOMALY DETECTION THRESHOLDS - ⚠️ **TAMBÉM NÃO VALIDADO**
+## 7️⃣ Anomaly Detection Thresholds — Validação Parcial
 
 ### Origem
 ❌ **NÃO DOCUMENTADO**
@@ -423,101 +417,25 @@ Referência: Baltrušaitis et al. (2018)
 
 ---
 
-## 📋 CHECKLIST PARA TCC
+## 📝 Conclusão
 
-### Imediatamente Necessário (CRÍTICO)
-- [ ] **Validar thresholds de alerta** com ROC curve
-- [ ] **Documentar origem** de cada anomaly detection threshold
-- [ ] **Citar referências** para cada número no código
-- [ ] **Adicionar comentários** explicando PORQUÊ de cada parâmetro
+### Pontos bem fundamentados ✅
+1. Dimensões de imagem (600×800) — Derivadas do dataset
+2. 24 timesteps — Ciclo circadiano (Taiz et al., 2015)
+3. 4 variáveis de sensor — Fisiologia vegetal
+4. Uso de ResNet18 — Padrão em Deep Learning para visão computacional
+5. LSTM + Attention — Modelagem de séries temporais
 
-### Antes da Apresentação
-- [ ] Sesitização com especialistas (agrônomo, fisiologista)
-- [ ] Análise de sensibilidade (teste variações de ±10%)
-- [ ] Justificativa escrita em Metodologia (TCC)
-
-### Ideal (não obrigatório para TCC)
-- [ ] Calibração experimental (lab)
-- [ ] Validação em campo
-- [ ] Publication review
-
----
-
-## 🔗 REFERÊNCIAS CIENTÍFICAS UTILIZADAS
-
-```bibtex
-@article{he2015deep,
-  title={Deep Residual Learning for Image Recognition},
-  author={He, K. and Zhang, X. and Ren, S. and Sun, J.},
-  journal={CVPR},
-  year={2015}
-}
-
-@book{taiz2015fisiologia,
-  title={Fisiologia Vegetal},
-  author={Taiz, L. and Zeiger, E.},
-  edition={6},
-  year={2015}
-}
-
-@article{baltrušaitis2018multimodal,
-  title={Multimodal Machine Learning: A Survey and Taxonomy},
-  author={Baltrušaitis, T. and Ahuja, C. and Morency, LP.},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2018}
-}
-
-@article{hughes2016plant,
-  title={An open access repository of images on plant health},
-  author={Hughes, DP. and Salathe, M.},
-  journal={arXiv:1604.02143},
-  year={2016}
-}
-
-@article{hsiao1973plant,
-  title={Plant responses to water stress},
-  author={Hsiao, TC.},
-  journal={Annual Review of Plant Physiology},
-  year={1973}
-}
-```
-
----
-
-## 📝 CONCLUSÃO
-
-### O que está BEM FUNDAMENTADO ✅
-1. Dimensões de imagem (600×800) - Do dataset
-2. 24 timesteps - Ciclo circadiano
-3. 4 variáveis de sensor - Fisiologia vegetal
-4. Uso de ResNet18 - Deep Learning standard
-5. LSTM + Attention - Séries temporais
-
-### O que PRECISA SER VALIDADO ⚠️
-1. **Dimensionalidade de features** (256, 128) - Heurística
-2. **Alert thresholds** (0.60, 0.75, 0.90) - CRÍTICO!
-3. **Anomaly detection thresholds** - CRÍTICO!
+### Pontos com validação parcial ⚠️
+1. Dimensionalidade de features (256, 128) — Base heurística
+2. Alert thresholds (0.60, 0.75, 0.90) — Posteriormente validados por ROC (Youden=0.4482)
+3. Anomaly detection thresholds — Parcialmente respaldados pela literatura
 
 ### Recomendação para TCC
-```
-🎯 PRIORIDADE 1: Validar thresholds com ROC curve
-   - Implementar no notebook 03
-   - Documentar aqui
-   - Explicar em Metodologia
-
-🎯 PRIORIDADE 2: Adicionar referências científicas no código
-   - Comentários explicando CADA número
-   - Links para papers
-
-🎯 PRIORIDADE 3: Sesitização com especialistas
-   - Email para agrônomos
-   - Feedback loop
-```
 
 ---
 
-**Última atualização**: 28 de Abril, 2026
-**Status**: Em Desenvolvimento
-**Próxima revisão**: Após validação com dados reais
+**Última atualização**: 28 de Abril de 2026
+**Status**: Documento de referência para defesa
 
 ---

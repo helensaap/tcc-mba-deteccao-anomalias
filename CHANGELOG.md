@@ -1,6 +1,6 @@
 # 📜 Changelog das Fases — Cronologia Técnica
 
-Linha do tempo única e auditável do projeto. Substitui: `PROGRESS_SUMMARY.md`, `PROJECT_SUMMARY.md`, `TRAINING_LOG.md`, `TRAINING_PROGRESS_REPORT.md`, `TRAINING_SUMMARY.txt`, `FASE_7_STATUS.txt`, `FASE_7_EXPLAINED.md`, `SUMMARY_FASE_7.md`, `INDEX_DOCUMENTOS_ANALISE.md`.
+Linha do tempo única e auditável do projeto.
 
 ---
 
@@ -113,7 +113,7 @@ Detalhes em [AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md).
 
 ## Fase Documentação — Consolidação (29-Jun-2026)
 
-- 28 arquivos `.md/.txt` na raiz → 9 arquivos enxutos
+- 28 arquivos `.md/.txt` na raiz → 9 documentos
 - Métricas unificadas em [RESULTS.md](docs/RESULTS.md) (fonte única de verdade)
 - Card de modelo formal em [MODEL_CARD.md](MODEL_CARD.md)
 - Scripts soltos movidos para `scripts/`
@@ -128,7 +128,7 @@ Detalhes em [AUDITORIA_CIENTIFICA.md](docs/AUDITORIA_CIENTIFICA.md).
 | Código (`src/`) | ✅ Sólido, com 3 arquivos de teste cobrindo metrics/models/alerts |
 | Modelo oficial | ✅ `best_model_semi_supervised.pt` — 64.71% test acc, AUC 0.729 |
 | Frontend Streamlit | ✅ Funcional ([app.py](app.py)) |
-| Documentação | ✅ Consolidada — 9 arquivos enxutos |
+| Documentação | ✅ Consolidada — 9 documentos |
 | Reprodutibilidade | ✅ σ=0.0 verificada |
 | Defesa acadêmica | ✅ Material pronto em [METODOLOGIA.md](docs/METODOLOGIA.md) |
 

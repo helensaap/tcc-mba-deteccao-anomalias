@@ -1,9 +1,9 @@
-# 📊 RESULTS — Fonte Única de Verdade
+# 📊 Resultados — Métricas Consolidadas
 
 **Última atualização:** 2026-06-29
 **Métricas extraídas diretamente de:** `results/*.json`
 
-Este é o **único documento autorizado** a reportar métricas do projeto. Qualquer outra fonte (slides, posts, conversas) deve referenciar esta tabela.
+Este documento apresenta as métricas oficiais do projeto de forma centralizada.
 
 ---
 
@@ -122,7 +122,7 @@ Estas métricas aparecem em documentos antigos e **estão erradas ou são engano
 | 100% accuracy (epoch 6) | logs de notebooks `.deprecated` | Dados sintéticos (np.random) — descontinuados |
 | ~50% accuracy | README antigo | Vago; o número exato é 52.94% (Fase 6 degenerada) |
 
-Veja [CHANGELOG_FASES.md](../CHANGELOG.md) para a cronologia completa.
+Veja [CHANGELOG.md](../CHANGELOG.md) para a cronologia completa.
 
 ---
 

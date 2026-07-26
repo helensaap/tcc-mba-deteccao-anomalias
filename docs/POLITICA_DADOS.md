@@ -1,14 +1,13 @@
-# 📋 POLÍTICA DE DADOS: APENAS DADOS REAIS
+# 📋 Política de Dados — Dados Reais do Experimento
 
 **Data**: 17 de Maio de 2026
-**Decisão**: APENAS DADOS REAIS DO EXPERIMENTO
-**Status**: ✅ IMPLEMENTADO
+**Status**: Implementado
 
 ---
 
-## 🔴 SCRIPTS DESCONTINUADOS (Dados Sintéticos)
+## 🔴 Scripts Descontinuados (Dados Sintéticos)
 
-Estes scripts foram **DESCONTINUADOS** e não devem ser usados:
+Estes scripts foram descontinuados e não devem ser utilizados:
 
 ```bash
 ❌ notebooks/04_retrain_improved.py
@@ -23,7 +22,7 @@ Estes scripts foram **DESCONTINUADOS** e não devem ser usados:
 
 ---
 
-## 🟢 SCRIPT OFICIAL (Dados Reais)
+## 🟢 Script Oficial (Dados Reais)
 
 ```bash
 ✅ notebooks/05_retrain_with_real_data.py
@@ -35,7 +34,7 @@ Estes scripts foram **DESCONTINUADOS** e não devem ser usados:
 
 ---
 
-## 📊 DADOS REAIS DO EXPERIMENTO
+## 📊 Dados Reais do Experimento
 
 ### Fonte
 ```
@@ -69,7 +68,7 @@ data/raw/1st Experiment/
 
 ---
 
-## 🎯 GARANTIAS
+## 🎯 Garantias de Reprodutibilidade e Honestidade
 
 ### Reprodutibilidade
 - ✅ Dados são públicos e imutáveis
@@ -91,34 +90,17 @@ data/raw/1st Experiment/
 
 ---
 
-## 📝 REGRA DE OURO
+## 📝 Critério de Validação
 
-```
-🎯 REGRA FUNDAMENTAL:
-
-SE ACURÁCIA > 95% EM PRIMEIRAS EPOCHS
-└─ INVESTIGAR IMEDIATAMENTE
-   ├─ Dados são realmente complexos?
-   ├─ Separabilidade é artificial?
-   ├─ Há overfitting?
-   └─ Usar DADOS REAIS ao invés de sintéticos
-```
+Durante o desenvolvimento, acurácias acima de 95% nas primeiras épocas devem ser investigadas como possível indicador de dados sintéticos ou separabilidade artificial. O uso exclusivo de dados reais (sem `np.random`) evita esse viés.
 
 ---
 
-## ✅ CONFIRMAÇÃO
+## ✅ Decisão Registrada
 
-```
-DECISÃO TOMADA: 17 de Maio de 2026
-APROVADO POR: Helen Paixão
-IMPLEMENTADO: Sim ✅
+**Data:** 17 de Maio de 2026  
+**Responsável:** Helen Paixão
 
-De agora em diante:
-✅ APENAS dados reais
-✅ NUNCA dados sintéticos
-✅ SEMPRE validável em campo
-```
+A partir desta data, o projeto adota exclusivamente dados reais do experimento "1st Experiment". Scripts com componentes sintéticos (`np.random.randn()`) foram movidos para `notebooks/_archive/` e não devem ser utilizados para resultados de defesa.
 
 ---
-
-**Próximas Execuções**: Usar SEMPRE `notebooks/05_retrain_with_real_data.py`

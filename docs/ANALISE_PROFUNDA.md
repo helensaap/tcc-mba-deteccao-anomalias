@@ -1,8 +1,6 @@
 # 🔬 Análise Técnica Profunda & Roadmap
 
-Consolida: `ANALISE_COMPLETA_PROFUNDA.md`, `MODEL_ANALYSIS_AND_IMPROVEMENT_STRATEGY.md`, `ANALISE_ALINHAMENTO_REQUISITOS.md`, `RESUMO_ANALISE_PT.md`.
-
-Foco: diagnóstico técnico do gap entre desempenho atual e estado-da-arte, mais um roadmap acionável.
+Diagnóstico técnico do gap entre desempenho atual e estado-da-arte, com roadmap acionável.
 
 ---
 

@@ -40,7 +40,7 @@ Resultado esperado: 64.71% test acc, σ=0.0 em 5 runs (seed=42).
 ## Estilo
 
 - Python 3.10+
-- Sem comentários redundantes — código fala por si
+- Código conciso e documentado
 - Docs em PT-BR (alinhado ao TCC)
 
 ## Reportar problemas

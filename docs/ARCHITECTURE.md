@@ -329,6 +329,5 @@ Diferentemente dos sistemas existentes que analisam imagens OU sensores isoladam
 
 ---
 
-**Última atualização**: Abril 2026
-**Status**: Em desenvolvimento
-**Próximos passos**: Treinamento completo, validação e deployment
+**Última atualização**: Junho 2026
+**Status**: Concluído — Projeto em fase de defesa
